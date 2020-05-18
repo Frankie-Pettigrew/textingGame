@@ -186,8 +186,10 @@ MonoBehaviour:
   EmojiFab: {fileID: 333458845338338137, guid: b5e20bf3300df4c7f9e2dfa5c3717ea8, type: 3}
   EmojiCue: {fileID: 1622811707}
   gameScore: 0
-  beatFab: {fileID: 2745302880203131303, guid: 62a40e0ee5a37446da13c57bdad763b9, type: 3}
+  beatFab: {fileID: 1145973497959631987, guid: 2acf1b599fc394ee492eac6f8b1eee25, type: 3}
   beatMade: 0
+  cpuTypingFab: {fileID: 936454920609895199, guid: 91b11bc477aac4bab826a70a9bc2640d,
+    type: 3}
   bmEvents: []
   playerKeys: 200000000d000000
   emoji:
@@ -600,12 +602,12 @@ PrefabInstance:
     - target: {fileID: 5356881973249979134, guid: 7e8051a64619e45b5b29c7500f357a38,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.85
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5356881973249979134, guid: 7e8051a64619e45b5b29c7500f357a38,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.013
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5356881973249979134, guid: 7e8051a64619e45b5b29c7500f357a38,
         type: 3}
@@ -754,7 +756,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &713563315
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -915,7 +917,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -2452173657333971538, guid: 618fd7790367440019a3106b28cc7363,
     type: 2}
-  m_audioClip: {fileID: 1400203226}
+  m_audioClip: {fileID: 1392427125}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -1092,7 +1094,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1328742083}
   m_CullTransparentMesh: 0
---- !u!83 &1400203226
+--- !u!83 &1392427125
 AudioClip:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

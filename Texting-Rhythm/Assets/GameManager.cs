@@ -44,7 +44,9 @@ public class GameManager : MonoBehaviour
     public GameObject beatFab;
     public bool beatMade;
 
-    public List<TypeBeat> bmEvents = new List<TypeBeat>();
+    public GameObject cpuTypingFab;
+
+    public List<typingBeat> bmEvents = new List<typingBeat>();
     public List<KeyCode> playerKeys = new List<KeyCode>() { KeyCode.Space,KeyCode.Return};
 
    
@@ -100,7 +102,7 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < gameLength; i++)
         {
             MBT newMeasure = new MBT(turnLength*(i+1), 0, 0);
-            TypeBeat newBeat = new TypeBeat();
+            typingBeat newBeat = new typingBeat();
             newBeat.bmEvent.eventMBT = newMeasure;
             newBeat.bmEvent.inputKey = KeyCode.Return;
 
@@ -123,11 +125,11 @@ public class GameManager : MonoBehaviour
 
     void checkCPUInputs()
     {
-        TypeBeat[] activeBeats = GameObject.FindObjectsOfType<TypeBeat>();
+        typingBeat[] activeBeats = GameObject.FindObjectsOfType<typingBeat>();
         bmEvents.AddRange(activeBeats);
         for (int i = 0; i < bmEvents.Count; i++)
         {
-            if (bmEvents[i].GetComponent<TypeBeat>().typeCue != TypeBeat.CueState.Early)
+            if (bmEvents[i].GetComponent<typingBeat>().typeCue != typingBeat.CueState.Early)
             {
                 for (int j = 0; j < CachedInputs.Count; j++)
                 {
@@ -152,16 +154,21 @@ public class GameManager : MonoBehaviour
 
    void createCPUTurn()
     {
+
+        GameObject beatHolder = Instantiate(cpuTypingFab);
+
+
         for (int i = 0; i < turnLength / 2; i++)
         {
             BeatMapEvent newEvent = new BeatMapEvent();
             MBT newMeasure = new MBT(clock.GetMBT().Measure + 2 * (i + 1), 0, 0);
             newEvent.eventMBT = newMeasure;
 
-            TypeBeat newBeat;
-            newBeat = Instantiate(beatFab).GetComponent<TypeBeat>();
-            newBeat.GetComponent<TypeBeat>().bmEvent = newEvent;
+            typingBeat newBeat;
+            newBeat = Instantiate(beatFab,beatHolder.transform.position,Quaternion.identity,beatHolder.transform).GetComponent<typingBeat>();
+            newBeat.transform.localPosition = new Vector2(-1+i, 0);
             newEvent.inputKey = KeyCode.Space;
+            newBeat.GetComponent<typingBeat>().bmEvent = newEvent;
 
             newBeat.OkWindowStart = newBeat.bmEvent.eventMBT.GetMilliseconds() - (0.5d * OkWindowMillis);
             newBeat.OkWindowEnd = newBeat.bmEvent.eventMBT.GetMilliseconds() + (0.5d * OkWindowMillis);
@@ -188,26 +195,26 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void ScoreBeat(TypeBeat beat)
+    void ScoreBeat(typingBeat beat)
     {
         switch (beat.typeCue)
         {
-            case TypeBeat.CueState.OK:
+            case typingBeat.CueState.OK:
                 gameScore += 1;
                 Debug.Log("OK!");
                 Destroy(beat.gameObject);
                 break;
-            case TypeBeat.CueState.Good:
+            case typingBeat.CueState.Good:
                 gameScore += 2;
                 Debug.Log("Good!");
                 Destroy(beat.gameObject);
                 break;
-            case TypeBeat.CueState.Perfect:
+            case typingBeat.CueState.Perfect:
                 gameScore += 3;
                 Debug.Log("Perfect!");
                 Destroy(beat.gameObject);
                 break;
-            case TypeBeat.CueState.Late:
+            case typingBeat.CueState.Late:
                 Destroy(beat.gameObject);
                 Debug.Log("Missed!");
                 break;

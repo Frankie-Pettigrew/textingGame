@@ -37,22 +37,22 @@ public class typingAnim : MonoBehaviour
         {
 
             prevChange = nextChange;
-            if (AudioSettings.dspTime == prevDSPTime)
-            {
-                Debug.Log("duplicate dsp time");
-                return;
-            }
+            //if (AudioSettings.dspTime == prevDSPTime)
+            //{
+            //    Debug.Log("duplicate dsp time");
+            //    return;
+            //}
 
-            else prevDSPTime = AudioSettings.dspTime;
+            //else prevDSPTime = AudioSettings.dspTime;
             
-            //check that we haven't held the dspTime over multiple updates
+            ////check that we haven't held the dspTime over multiple updates
             
            
-            nextChange = Clock.Instance.AtNextHalf();
+            nextChange = Clock.Instance.AtNextBeat();
 
-            if (nextChange == prevChange)
+            if (Mathf.Approximately((float)nextChange, (float) prevChange))
             {
-                Debug.Log("duplicate beat time");
+                //Debug.Log("duplicate beat time");
                 return;
             }
             
@@ -74,7 +74,7 @@ public class typingAnim : MonoBehaviour
         }
         lastSpr = sp.sprite;
         sp.sprite = sprites[thisSpr];
-        Debug.Log("Running");
+        //Debug.Log("Running");
         
         
 

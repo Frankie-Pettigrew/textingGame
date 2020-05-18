@@ -451,7 +451,7 @@ namespace Beat
         /// </summary>
         IEnumerator FirstBeat()
         {
-            yield return new WaitForSeconds(0.25f);
+            //yield return new WaitForSeconds(0.25f);
             Running = false;
             double startTick = AudioSettings.dspTime + StartDelay;
             _measureCount = 0;
@@ -481,6 +481,8 @@ namespace Beat
             {
                 GetComponent<AudioSource>().PlayScheduled(startTick);
             }
+
+            yield return null;
         }
 
         /// <summary>
